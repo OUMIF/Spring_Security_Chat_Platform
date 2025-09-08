@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import HelloWorld from './HelloWorld'
 import ListEmployeeComponent from './components/ListEmployeeComponent'
-
+import HeaderComponent from './components/HeaderComponent'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-         <ListEmployeeComponent />
-    </>
+    <div className="App min-vh-100 d-flex flex-column">
+      <HeaderComponent />
+      <main className="flex-grow-1">
+        <ListEmployeeComponent />
+      </main>
+    </div>
   )
 }
 
