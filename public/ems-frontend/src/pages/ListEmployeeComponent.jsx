@@ -25,7 +25,7 @@ const ListEmployeeComponent = () => {
 
    }
    function updateEmployee(id){
-        navigator(`edit-employees/${id}`)
+        navigator(`edit-employee/${id}`)
    }
    function removeEmployee(id){
     console.log(id);
