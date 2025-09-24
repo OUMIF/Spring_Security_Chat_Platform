@@ -46,12 +46,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
-              if (authHeader != null && authHeader.startsWith("Bearer ")) {
+              if (authHeader == null && !authHeader.startsWith("Bearer ")) {
                   filterChain.doFilter(request, response);
                   return;
               }
               try{
-                  final String jwt = authHeader.substring(7);
+                  final String jwt = authHeader.substring(7); // supprime "Bearer " du début pour récupérer le token réel.
                   final String userEmail = jwtService.extractUsername((jwt));
 
                   Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -64,7 +64,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                         null,
                                         userDetails.getAuthorities()
                                 );
-                                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); // Logger qui se connecte depuis quelle IP; Détecter un comportement suspect; Fournir des informations supplémentaires aux gestionnaires d’authentification
                                 SecurityContextHolder.getContext().setAuthentication(authToken);
                             }
                   }
