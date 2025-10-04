@@ -13,6 +13,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws").withSockJS();
+        // Pour Postman (WebSocket brut)
+        registry.addEndpoint("/ws-raw")
+                .setAllowedOrigins("*");
 
     }
 
